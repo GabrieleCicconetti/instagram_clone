@@ -43,6 +43,13 @@ flutter:
     - camera.png
     - storyborder.png
     - plus_blue.png
+    - more.png
+    - heart.png
+    - comment.png
+    - save.png
+    - home.png
+    - search.png
+    - plus.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
