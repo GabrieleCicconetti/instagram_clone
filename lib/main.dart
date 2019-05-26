@@ -45,17 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Image.asset("camera.png"),
         ),
       ),
-      body: Center(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: Container(
-                height: 120,
-                child: StoriesListView(),
-              ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Container(
+              height: 120,
+              child: StoriesListView(),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -63,15 +61,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class StoriesListView extends StatelessWidget {
   String image() {
-    return "https://picsum.photos/id/${Random().nextInt(20)}/200/200";
+    return "https://picsum.photos/id/${Random().nextInt(50)}/200/200";
   }
 
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return ListView.builder(
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
           child: Column(
             children: <Widget>[
               Expanded(
@@ -80,9 +79,7 @@ class StoriesListView extends StatelessWidget {
                   children: <Widget>[
                     Positioned.fill(
                       child: index > 0
-                          ? Image.asset(
-                              "storyborder.png",
-                            )
+                          ? Image.asset("storyborder.png")
                           : Container(),
                     ),
                     Positioned.fill(
@@ -90,23 +87,18 @@ class StoriesListView extends StatelessWidget {
                         padding: const EdgeInsets.all(5.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(
-                            Radius.circular(30),
+                            Radius.circular(40),
                           ),
-                          child: Image.network(
-                            image(),
-                            fit: BoxFit.cover,
-                          ),
+                          child: Image.network(image(), fit: BoxFit.cover),
                         ),
                       ),
                     ),
                     Positioned(
-                      width: 25,
+                      width: 23,
                       bottom: 0,
                       right: 0,
                       child: index == 0
-                          ? Image.asset(
-                              "plus_blue.png",
-                            )
+                          ? Image.asset("plus_blue.png")
                           : Container(),
                     ),
                   ],
@@ -116,18 +108,20 @@ class StoriesListView extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                index > 0 ? "Your best friend!!" : "Your story",
+                index > 0 ? "Your best friend!!!" : "Your Story!",
                 maxLines: 1,
+                style: TextStyle(
+                  fontSize: 12,
+                ),
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 11),
               ),
             ],
           ),
         );
       },
       itemExtent: 90,
-      itemCount: 50,
       scrollDirection: Axis.horizontal,
+      itemCount: 50,
     );
   }
 }
