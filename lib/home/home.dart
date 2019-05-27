@@ -9,43 +9,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  BottomNavigationBarItem bottomButtonItem(String image) {
+    return BottomNavigationBarItem(
+      icon: Image.asset(
+        image,
+        height: 25,
+      ),
+      title: Container(
+        height: 0,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
+          bottomButtonItem("home.png"),
+          bottomButtonItem("search.png"),
+          bottomButtonItem("plus.png"),
+          bottomButtonItem("heart.png"),
           BottomNavigationBarItem(
-            icon: Image.asset(
-              "home.png",
-              height: 25,
+            icon: Utils.getProfileImage(height: 25.0),
+            title: Container(
+              height: 0,
             ),
-            title: Text(""),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              "search.png",
-              height: 25,
-            ),
-            title: Text(""),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              "plus.png",
-              height: 25,
-            ),
-            title: Text(""),
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              "heart.png",
-              height: 25,
-            ),
-            title: Text(""),
-          ),
-          BottomNavigationBarItem(
-            icon: Utils.getProfileImage(),
-            title: Text(""),
           ),
         ],
       ),
@@ -110,7 +101,7 @@ class MainHomeList extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 10),
+                      vertical: 10.0, horizontal: 15),
                   child: Row(
                     children: <Widget>[
                       ClipRRect(
@@ -149,7 +140,7 @@ class MainHomeList extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(
-                          top: 15, left: 10, right: 10, bottom: 10),
+                          top: 15, left: 15, right: 20, bottom: 10),
                       child: Row(
                         children: <Widget>[
                           Image.asset(
@@ -183,7 +174,7 @@ class MainHomeList extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
+                      padding: const EdgeInsets.only(left: 15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
