@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/utils.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key key, this.controller}) : super(key: key);
+
+  final PageController controller;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   BottomNavigationBarItem bottomButtonItem(String image) {
     return BottomNavigationBarItem(
       icon: Image.asset(
@@ -44,18 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 2.0,
         backgroundColor: Color(0xFFFAFAFA),
         title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 13.0),
+          padding: const EdgeInsets.only(top: 16.0, bottom: 10.0),
           child: Image.asset("InstagramLogo.png"),
         ),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.all(16),
             child: Image.asset("direct.png"),
-          )
+          ),
         ],
-        leading: Padding(
-          padding: EdgeInsets.all(14),
-          child: Image.asset("camera.png"),
+        leading: GestureDetector(
+          onTap: () {
+            widget.controller.animateToPage(
+              0,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.ease,
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.all(14),
+            child: Image.asset("camera.png"),
+          ),
         ),
       ),
       body: CustomScrollView(
@@ -84,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
 class MainHomeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
