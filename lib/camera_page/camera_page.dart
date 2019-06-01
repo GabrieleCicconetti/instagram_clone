@@ -17,6 +17,7 @@ class CameraPage extends StatefulWidget {
 class CameraPageState extends State<CameraPage> {
   CameraController _controller;
   Future<void> _controllerInizializer;
+  double cameraHorizontalPosition = 0;
 
   Future<CameraDescription> getCamera() async {
     final c = await availableCameras();
@@ -28,16 +29,21 @@ class CameraPageState extends State<CameraPage> {
     super.initState();
 
     getCamera().then((camera) {
+      if (camera == null) return;
       setState(() {
         _controller = CameraController(
           camera,
           ResolutionPreset.high,
         );
         _controllerInizializer = _controller.initialize();
+        _controllerInizializer.whenComplete(() {
+          setState(() {
+            cameraHorizontalPosition = -(MediaQuery.of(context).size.width*_controller.value.aspectRatio)/2;
+          });
+        });
       });
     });
   }
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -49,11 +55,12 @@ class CameraPageState extends State<CameraPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Stack(
+      alignment: Alignment.center,
       children: <Widget>[
         Positioned.fill(
           /* trying to preserve aspect ratio */
-          left: -((MediaQuery.of(context).size.width)*_controller.value.aspectRatio)/2,
-          right: -((MediaQuery.of(context).size.width)*_controller.value.aspectRatio)/2,
+          left: cameraHorizontalPosition,
+          right: cameraHorizontalPosition,
           child: FutureBuilder(
             future: _controllerInizializer,
             builder: (context, snapshot) {
